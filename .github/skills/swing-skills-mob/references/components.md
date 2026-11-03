@@ -3,7 +3,10 @@
 Every component, variant matrix, exact geometry and source node ID, extracted live from
 **ADS: For Mobile** (`ILlOBW8RpEBRmDvU6LQsx9`).
 
-**Rule: reuse these. Do not build a new component when one below already fits.**
+**Rule: reuse these whenever they fit.** New component and interaction-pattern proposals
+are allowed when no existing component or established Swing pattern meets the need, within
+the approximately 30% novelty allowance in `SKILL.md` §5. New proposals are not official
+Swing standards until approved and documented.
 
 ---
 

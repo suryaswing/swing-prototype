@@ -45,7 +45,7 @@ Before presenting, grep the deliverable for anything that is not a token.
 | Arbitrary radius | Any radius other than `4 / 8 / 12 / 100px` |
 | Arbitrary shadow | Any shadow other than `Elevation Small` / `Elevation Large` |
 | Arbitrary spacing | Any padding/gap not in the observed value set |
-| Invented component | A component that duplicates an existing one |
+| New component / pattern | More than about 30% of distinct component and interaction-pattern roles are novel, or a new role duplicates an existing component |
 
 > ⚠️ **`index.html` warning:** the prototype in this repo uses `--ink: #17352b`,
 > `--green: #2d654d`, `--line: #dce5df`, `--paper: #fbfcfa` and DM Sans. **These are
@@ -65,8 +65,17 @@ For every component in the deliverable:
 3. Does my instance respect the component's documented props and variants?
 4. Do all interactive states exist?
 
-If a genuinely new component is required, say so explicitly and propose it as a
-**candidate for standardisation** — including which existing components it relates to.
+New components and interaction patterns are allowed when existing Swing components or
+established patterns do not fit. Keep them to **about 30% or less of distinct roles** in
+the design, aiming for at least 70% reuse. Count roles, not repeated instances; exclude
+primitive text, spacing, and decoration. Report `new roles / all roles` and the resulting
+approximate percentage. If fewer than four roles make the ratio exceed the allowance,
+disclose it and ask before proceeding unless that specific exception was already approved.
+
+For each new role, explain why reuse is not possible and name the closest existing
+component or pattern considered. Use verified Swing tokens; label the design as a
+proposal, not an official standard. Recommend genuinely reusable additions for
+standardisation.
 
 ---
 
@@ -132,8 +141,11 @@ End every design deliverable with this block. It is not optional.
 - <Figma component name> (<node ID>) — <where used>
 
 **New components proposed:**
-- <name> — <why reuse was not possible>
+- <name> — <why reuse was not possible> — <count/ratio, e.g. 2 of 8 roles = 25%>
   OR: None — all requirements covered by existing components.
+
+**New component / pattern allowance:**
+- <new roles / total roles = approximate percentage, and how the count was made>
 
 **Tokens applied:**
 - Colours: <list or "all from color-system.md">

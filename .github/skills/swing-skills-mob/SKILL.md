@@ -13,8 +13,10 @@ way, you read this file and follow the workflow below before producing anything.
 [ADS - For Mobile](https://www.figma.com/design/ILlOBW8RpEBRmDvU6LQsx9/ADS--For-Mobile?node-id=149-4844)
 — `fileKey: ILlOBW8RpEBRmDvU6LQsx9`
 
-Never invent a token, measurement, or component. If Figma does not define it, mark it
-**`UNDOCUMENTED`** and follow [§5 Missing specifications](#5-handling-missing-specifications).
+Never invent a token, measurement, or component specification. New ideas and components
+may be proposed within the bounded-innovation rule in §5, but must be labelled as
+proposals rather than official Swing standards. If Figma does not define a specification,
+mark it **`UNDOCUMENTED`** and follow [§6 Handling missing specifications](#6-handling-missing-specifications).
 
 ---
 
@@ -48,6 +50,13 @@ Follow all five steps, in order, for **every** design-related request.
 
 Read this file, then load only the reference files relevant to the task
 (see [§4 References](#4-reference-files)). Do not rely on remembered design values.
+
+If the request includes a PRD, product brief, or requirements document, first follow
+[`swing-prd-review`](../swing-prd-review/SKILL.md) to check product behavior, edge cases,
+and design-blocking questions. Carry confirmed requirements and any explicitly accepted
+assumptions into the design. Do not treat unresolved PRD questions as approved product
+behavior. If no PRD is available, clarify material product-flow ambiguity or mark it as
+an assumption before designing.
 
 ### Step 2 — Inspect the official Figma design system
 
@@ -142,8 +151,13 @@ DESIGN SYSTEM (mandatory — do not deviate):
 - Elevation: Elevation Small 0 2px 8px rgba(0,0,0,0.08) · Elevation Large 0 16px 24px rgba(0,0,0,0.22)
 - Touch targets: minimum 48 × 48px.
 
-COMPONENTS — reuse these existing Swing components, do not redraw them:
+COMPONENTS — reuse these existing Swing components wherever they fit:
 - <component name> (<variant props>) — <usage>
+
+NEW IDEAS / COMPONENTS:
+- Keep genuinely new component and interaction-pattern roles to about 30% or less of the screen.
+- Explain why each cannot be covered by an existing Swing component or established pattern.
+- Build proposals with verified Swing tokens; label them as proposals, not official standards.
 
 REQUIRED STATES:
 - <e.g. field Default / Focused / Error / Disabled; button Default / On press / Loading / Disabled>
@@ -152,9 +166,10 @@ LAYOUT:
 - <structure, in order, with the spacing tokens above>
 
 DO NOT:
-- Invent colours, type styles, radii, shadows or components.
+- Invent colours, type styles, radii or shadows.
 - Use any font other than Manrope.
 - Deviate from 343px content width.
+- Exceed the ~30% new component / pattern allowance without disclosing it and getting approval.
 ```
 
 Fill every `<...>` with real values from the reference files. If a value is not in the
@@ -181,14 +196,26 @@ Load only what the task needs.
 
 ## 5. Component reusability rules
 
-1. **Never create a new component when an existing Swing component fulfils the need.**
+1. **Reuse an existing Swing component whenever it fulfils the need.** A new idea or
+   component is allowed when no existing component or established Swing pattern fits.
 2. **Respect existing component properties and variants** — do not flatten or extend them
    ad hoc.
 3. **Maintain consistent behaviour and interaction states** across every instance.
-4. **Avoid unnecessary visual deviations.**
-5. If a new component is genuinely required, **explain why the existing component cannot
-   be reused** — and name the closest existing component you rejected.
-6. **Recommend new components that can be standardised** for future Swing features.
+4. **Allow bounded innovation:** keep genuinely new component and interaction-pattern
+   roles to about 30% or less of the screen; aim for at least 70% reuse of existing
+   Swing components or established Swing patterns.
+5. Count distinct component/pattern roles, not repeated instances. Calculate
+   `new roles ÷ all roles × 100`; exclude primitive text, spacing, and decoration from
+   the count. State the count and approximate percentage in the handoff.
+6. If the screen has fewer than four roles, disclose the resulting ratio; do not silently
+   exceed the allowance. Ask before exceeding it unless the user has already approved
+   the specific exception.
+7. For every new role, **explain why reuse was not possible** and name the closest
+   existing component or pattern considered.
+8. Use verified Swing tokens and document interaction behavior. Mark unsupported
+   product behavior or visual specifications `UNDOCUMENTED`; do not present proposals
+   as official Swing standards.
+9. Recommend genuinely useful new components for standardisation in future Swing work.
 
 Component search order:
 
@@ -263,5 +290,36 @@ Full procedure and the mandatory compliance block:
 | 9 | Inconsistencies found in Figma are documented as-is, never normalised away |
 | 10 | The result must read as a native part of the Swing application |
 
-**Consistency is mandatory. Creativity operates within Swing's established design
-standards.**
+**Consistency is mandatory. Creativity may introduce new ideas within the ~30% allowance,
+while reusing Swing patterns and staying within verified design tokens.**
+
+---
+
+## 9. Keeping this skill in sync with Figma
+
+The Figma library remains the source of truth; these Markdown references are a maintained
+snapshot and do not update automatically. When the user says a component or token changed:
+
+1. Ask for or use the relevant Figma file/page/component link. Confirm it is in
+   `ADS: For Mobile`; do not infer a change from a screenshot or description alone when
+   exact specifications matter.
+2. Inspect the current component in Figma MCP. Record its page, component/variant name,
+   node ID, properties, states, geometry, and styles that are relevant to the change.
+3. Compare the live Figma data with the existing reference. Report material differences,
+   including removed or renamed variants. Do not silently normalize inconsistencies.
+4. Update only the affected sections in `references/components.md` and the relevant
+   token references (`color-system.md`, `typography.md`, `spacing-layout.md`,
+   `interaction-patterns.md`, or `design-tokens.md`). Update the quality checklist's
+   known-gap list if the change resolves or introduces a documented gap.
+5. Cite Figma node IDs and distinguish verified updates from details still missing or
+   unverified. Do not infer undocumented states or measurements.
+6. Mirror the same changes to `.github/skills/swing-skills-mob/` and verify both trees
+   are identical.
+7. Summarize what changed and what could not be verified. Do not commit or push unless
+   the user asks.
+
+For routine design tasks, inspect the relevant live component before use as described in
+§2, but do not rewrite the skill references unless the user requests a documentation
+refresh or a clear material mismatch is discovered. In the latter case, flag the stale
+reference and ask whether to update the skill when changing documentation is outside the
+requested task.

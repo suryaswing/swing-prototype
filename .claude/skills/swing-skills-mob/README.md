@@ -19,8 +19,13 @@ task — not as an optional reference.
 - Generates Figma Make / Figma Use prompts that contain the **actual** Swing
   specifications, not a vague "follow the design system".
 - Enforces component reuse over reinvention.
+- Allows bounded creativity: new component and interaction-pattern roles may account for
+  about 30% of a design when existing Swing patterns do not fit, with the proposal clearly
+  labelled and token-consistent.
 - Marks anything absent from Figma as `UNDOCUMENTED` instead of inventing it.
 - Requires a compliance disclosure block on every deliverable.
+- Pairs with [`swing-prd-review`](../swing-prd-review/README.md): review a provided PRD
+  for flows, edge cases, and open questions before applying visual design standards.
 
 ---
 
@@ -154,6 +159,12 @@ Full list: [design-quality-checklist.md §5](./references/design-quality-checkli
 - Record inconsistencies **as they are** — for example the searchbar radius is 8px at
   Medium and 12px at Large. Do not normalise them away.
 - When a previously undocumented area is added to Figma, move it out of the §5 gap list.
+- Figma changes do not update these references automatically. To refresh one, ask the
+  agent: *"Update `swing-skills-mob` from this Figma component"* and share its node link.
+  The agent should inspect the live component, compare it with the docs, update only
+  affected references, mirror the update to `.github/skills/`, and report what changed.
+- Provide edit access to the repository and view access to the Figma library. No commit
+  or push is made unless requested.
 
 ---
 
