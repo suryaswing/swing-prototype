@@ -244,10 +244,29 @@
       cursor: pointer;
     }
     .remember input {
+      display: grid;
       width: 20px;
       height: 20px;
       margin: 0;
-      accent-color: var(--purple-500);
+      flex: 0 0 20px;
+      appearance: none;
+      place-items: center;
+      border: 1px solid var(--dark-100);
+      border-radius: 4px;
+      background: var(--light-100);
+      cursor: pointer;
+    }
+    .remember input:checked {
+      border-color: var(--purple-500);
+      background: var(--purple-500);
+    }
+    .remember input:checked::after {
+      width: 5px;
+      height: 9px;
+      transform: translateY(-1px) rotate(45deg);
+      border-right: 2px solid var(--light-100);
+      border-bottom: 2px solid var(--light-100);
+      content: '';
     }
 
     .notice {
