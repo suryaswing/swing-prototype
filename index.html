@@ -421,6 +421,18 @@
       passwordInput.focus();
     });
 
+    form.addEventListener('invalid', (event) => {
+      if (event.target instanceof HTMLInputElement) {
+        event.target.setAttribute('aria-invalid', 'true');
+      }
+    }, true);
+
+    form.addEventListener('input', (event) => {
+      if (event.target instanceof HTMLInputElement && event.target.validity.valid) {
+        event.target.removeAttribute('aria-invalid');
+      }
+    });
+
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       showNotice('Form siap dihubungkan ke layanan autentikasi.');
