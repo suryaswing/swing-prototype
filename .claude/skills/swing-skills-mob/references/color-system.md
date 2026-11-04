@@ -1,24 +1,32 @@
 # Swing Mobile — Color System
 
-All values below were extracted live from the **ADS: For Mobile** Figma library
-(`ILlOBW8RpEBRmDvU6LQsx9`) via Figma MCP. Every hex has a source node recorded.
+The base palette is defined in **ADS: Foundations** (`JDN6zpJA4feGSY8ZcQMQeM`), with
+mobile component usage verified in **ADS: For Mobile**
+(`ILlOBW8RpEBRmDvU6LQsx9`). Values below retain the source nodes where inspected. See
+[design-foundations.md](./design-foundations.md) for source responsibilities and
+additional verified palette values.
 
 ## 1. The two-tier model
 
 Swing Mobile colors are organised in **two tiers**:
 
-1. **Brand ramp** — `{NAME}/500` (saturated) and `{NAME}/50` (tint).
+1. **Brand ramp** — named color families with numbered shades. Foundations contains
+   additional shades beyond the subset used by documented Mobile components.
 2. **Neutral ramp** — `DARK/500 → DARK/100` and `LIGHT/500 → LIGHT/100`.
 
-There is **no documented semantic alias layer** (no `color/bg/primary`, no
-`surface/raised`, etc.). Components reference ramps directly in Figma. Do not invent
-semantic aliases and present them as Swing standards.
+The Mobile component library has **no documented semantic alias layer** (no
+`color/bg/primary`, no `surface/raised`, etc.). Components reference ramps directly in
+Figma. Do not invent semantic aliases and present them as Swing standards. A foundation
+shade's presence does not by itself establish its intended mobile component usage.
 
 ---
 
 ## 2. Brand ramp
 
-Each family ships a saturated `500` and a tint `50`. Exceptions are noted.
+The table below records brand shades used by documented Mobile components. Foundations
+also defines additional palette shades; their exact verified Purple values are listed in
+[design-foundations.md](./design-foundations.md). A shade's presence there does not
+establish a mobile component usage.
 
 | Family | `500` | `50` | Source node(s) |
 |---|---|---|---|
@@ -31,8 +39,9 @@ Each family ships a saturated `500` and a tint `50`. Exceptions are noted.
 | `RED` | `#FF2A12` | `#FFF8F5` | Tag `13:9051`, Text field / Warning `13:2999`, Toaster / Error `13:15738` |
 | `RED / 600` | `#ED1800` | — | Text caption / Error `11:1471` |
 
-`PURPLE / 600` and `RED / 600` are **600-level shades that exist only in the 600 tier** —
-there are no 600 levels for the other families in the mobile library.
+`PURPLE / 600` and `RED / 600` are the only 600-level shades documented in the Mobile
+component usage captured here. The broader Foundations palette may define additional
+shades; do not infer component semantics from the shade number.
 
 > **Note on `#f0d`:** Figma's `get_design_context` emits short-form hex inside Tailwind
 > arbitrary values. `#f0d` === `#FF00DD`. Always expand before writing CSS.

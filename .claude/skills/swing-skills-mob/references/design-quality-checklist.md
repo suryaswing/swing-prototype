@@ -10,13 +10,16 @@ verify must be disclosed — never silently assumed.
 Before completing any design-related task, validate:
 
 - [ ] Does the design follow **Swing's official colour palette**?
-  → every fill/stroke/text colour traces to a token in [color-system.md](./color-system.md)
+  → every fill/stroke/text colour traces to a token in [color-system.md](./color-system.md);
+    check mobile usage against [design-foundations.md](./design-foundations.md)
 - [ ] Is **typography** consistent with Swing standards?
   → every text node uses a named style from [typography.md](./typography.md); Manrope only
 - [ ] Are **spacing and margins** consistent?
   → values come from [spacing-layout.md](./spacing-layout.md); no invented gaps
 - [ ] Are **existing components reused** appropriately?
   → matched against [components.md](./components.md) before anything new is drawn
+- [ ] Are **icons and logos** exact Swing assets, named and source-linked?
+  → matched against [icon-logo-usage.md](./icon-logo-usage.md); no text or emoji logo substitutes
 - [ ] Are **button and input states** consistent?
   → Default / On press / Disabled at minimum; fields show Focused / Error / Success
 - [ ] Are **interaction patterns** aligned with the existing application?
@@ -117,7 +120,7 @@ immediately rather than filling the hole with a guess.
 | Haptics | **UNDOCUMENTED** |
 | Accessibility: contrast rules, focus order, screen-reader labels, ARIA | **UNDOCUMENTED** |
 | Minimum body font-size rule | **UNDOCUMENTED** (scale reaches 8px) |
-| Icon grid, stroke width, icon library source | **UNDOCUMENTED** |
+| Universal icon grid, stroke width, completeness of `Icons (Final)` catalog, logo clear-space rules and full logo lockup inventory | **UNDOCUMENTED** — Foundations has icon and logo pages, but coverage and universal rules have not been verified |
 | Empty-state component / pattern | **UNDOCUMENTED** |
 | Error-message copy guidelines | **UNDOCUMENTED** |
 | Toast duration, stacking, dismissal rules | **UNDOCUMENTED** |
@@ -146,6 +149,9 @@ End every design deliverable with this block. It is not optional.
 
 **New component / pattern allowance:**
 - <new roles / total roles = approximate percentage, and how the count was made>
+
+**Icons and logos:**
+- <asset name> (<Figma node ID>) — <role, verified variant/size, and local file if exported>
 
 **Tokens applied:**
 - Colours: <list or "all from color-system.md">

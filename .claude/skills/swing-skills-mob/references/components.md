@@ -545,7 +545,7 @@ Pictures Medium `11:675` · Guest Medium `11:683`.
 | `interface/` | Standard UI icons | `search` `515:7044`, `info`, `close-circle`, `close-lg`, `warning-circle` |
 | `interface/so-*` | "Swing original" — filled/branded style | `so-stars` `1962:92`, `so-love`, `so-checkmark`, `so-tick-circle`, `so-warning-circle`, `so-image`, `so-info` |
 | `arrow/` | Directional | `chevron-down` |
-| `Logo /` | Brand marks | `Swing Pass icon` `912:14145` |
+| `Logo /` | Brand marks | `Swing Pass icon` `912:14146` (inside component `912:14145`) |
 
 **Observed icon sizes**, by context:
 
@@ -559,10 +559,15 @@ Pictures Medium `11:675` · Guest Medium `11:683`.
 | `10 × 10` | Tag Small optional icons |
 | `48 × 48` | Card image placeholder |
 
-**UNDOCUMENTED:** no icon-grid rule, no stroke-width specification, no documented icon
-library source (no link to an icon set) and no documented icon-size scale. Sizes above
-are observed per-context. Do not invent new icons — reference an existing
-`interface/...` name.
+The Mobile library is authoritative for the icon instances used by its components.
+Foundations provides an `Icons (Final)` page (`7:311`) as the source for searching
+standalone Swing icons; its complete coverage has not been audited. Use
+[icon-logo-usage.md](./icon-logo-usage.md) to inspect, record, export, and implement the
+exact asset for a task.
+
+**UNDOCUMENTED:** no universal icon grid, stroke-width specification, or universal
+icon-size scale. Sizes above are observed per-context. Do not invent new icons or assume
+that a similarly named glyph is the same asset.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: swing-skills-mob
-description: "Mandatory design system standard for ALL Swing Mobile UI/UX work. Use when generating a UI design with Figma Make, modifying or improving a design in Figma, writing a Figma Make or Figma Use prompt, using Figma tools or the Figma MCP server, generating or improving Swing Mobile screens, components or user flows, or creating any mobile UI variation, prototype or design exploration. Enforces the official Swing Mobile Design System from the ADS - For Mobile Figma file: colour palette, Manrope typography scale, spacing and 375px layout, component reuse rules, interaction states, and design quality validation. Read this before touching any Swing design."
+description: "Mandatory design system standard for ALL Swing Mobile UI/UX work. Use when generating a UI design with Figma Make, modifying or improving a design in Figma, writing a Figma Make or Figma Use prompt, using Figma tools or the Figma MCP server, generating or improving Swing Mobile screens, components or user flows, or creating any mobile UI variation, prototype or design exploration. Enforces the official Swing Design System using ADS - Foundations for foundational visual assets and tokens and ADS - For Mobile for mobile component specifications, layout, interaction states, and design quality validation. Read this before touching any Swing design."
 argument-hint: 'Describe the Swing Mobile screen, component, or Figma Make prompt you need'
 ---
 
@@ -9,9 +9,18 @@ argument-hint: 'Describe the Swing Mobile screen, component, or Figma Make promp
 **This skill is mandatory, not a reference.** If a task touches Swing Mobile UI/UX in any
 way, you read this file and follow the workflow below before producing anything.
 
-**Source of truth:**
-[ADS - For Mobile](https://www.figma.com/design/ILlOBW8RpEBRmDvU6LQsx9/ADS--For-Mobile?node-id=149-4844)
-— `fileKey: ILlOBW8RpEBRmDvU6LQsx9`
+**Official design sources:**
+
+- [ADS - Foundations](https://www.figma.com/design/JDN6zpJA4feGSY8ZcQMQeM/ADS--Foundations?node-id=8-12868)
+  — `fileKey: JDN6zpJA4feGSY8ZcQMQeM`; foundation palette, elevation, iconography, and
+  brand/logo assets.
+- [ADS - For Mobile](https://www.figma.com/design/ILlOBW8RpEBRmDvU6LQsx9/ADS--For-Mobile?node-id=149-4844)
+  — `fileKey: ILlOBW8RpEBRmDvU6LQsx9`; mobile component specifications, layout, and
+  component interaction states.
+
+Use the Foundations file for base visual assets and primitives, then verify how a token
+or asset is applied in the Mobile library. Do not treat every foundation color or asset
+as an approved mobile component variant.
 
 Never invent a token, measurement, or component specification. New ideas and components
 may be proposed within the bounded-innovation rule in §5, but must be labelled as
@@ -25,7 +34,8 @@ mark it **`UNDOCUMENTED`** and follow [§6 Handling missing specifications](#6-h
 | | |
 |---|---|
 | Platform | Swing Mobile (iOS / Android) |
-| Figma library | `ADS: For Mobile` |
+| Foundation library | `ADS: Foundations` |
+| Mobile component library | `ADS: For Mobile` |
 | Canonical artboard | **375 × 812** (iPhone 11 Pro / X) |
 | Content width | **343px** (375 − 2 × 16) |
 | Typeface | **Manrope** only |
@@ -33,9 +43,9 @@ mark it **`UNDOCUMENTED`** and follow [§6 Handling missing specifications](#6-h
 | Minimum touch target | **48 × 48px** |
 | Component pages in library | 47 |
 
-Do **not** confuse this with the sibling Figma libraries `ADS: For Desktop`,
-`ADS: Foundations`, `Minimal_Web`, or `Eagle - Swing Design System 2.0`. Only
-`ADS: For Mobile` governs mobile work.
+Do not substitute the sibling libraries `ADS: For Desktop`, `Minimal_Web`, or
+`Eagle - Swing Design System 2.0`. For mobile work, use the two official sources above
+with their distinct responsibilities.
 
 > ⚠️ The `index.html` in this repo uses `--ink: #17352b`, `--green: #2d654d` and DM Sans.
 > **Those are prototype-only and are NOT Swing tokens.** Never cite or copy them.
@@ -60,13 +70,21 @@ an assumption before designing.
 
 ### Step 2 — Inspect the official Figma design system
 
-Use the Figma MCP server against `ILlOBW8RpEBRmDvU6LQsx9` to inspect the relevant
-pages, frames, components, styles and variables. **Do not rely solely on previously
+Use the Figma MCP server to inspect both official sources: `JDN6zpJA4feGSY8ZcQMQeM`
+for foundation colors, elevation, icons and logos, and `ILlOBW8RpEBRmDvU6LQsx9` for
+mobile components, layout and interaction states. **Do not rely solely on previously
 remembered design information** — re-verify what the task depends on.
+
+For an icon/logo request, inspect the exact asset in Foundations first, then confirm
+its intended mobile usage in the relevant Mobile component. For a color or elevation,
+inspect the foundation token and the Mobile component that applies it; if no mobile
+usage is established, disclose that rather than implying it is a standard component
+variant.
 
 Practical MCP notes:
 
-- `get_metadata` with **no** `nodeId` lists all 47 pages — the cheapest way to orient.
+- `get_metadata` with **no** `nodeId` lists the pages of the queried file — the cheapest
+  way to orient. The Mobile library has 47 pages.
 - `get_metadata` on a page returns its child frame/symbol IDs.
 - `get_design_context` works on `<frame>` and `<symbol>` nodes, **not** on `<canvas>`
   (page) nodes. If it fails, get a child frame ID from `get_metadata` first.
@@ -82,7 +100,10 @@ Practical MCP notes:
 
 Search [components.md](./references/components.md) §22 (full inventory) and §21
 (not-yet-documented pages) **before** drawing anything. Determine which existing Swing
-components, tokens, patterns and states should be reused.
+components, tokens, patterns, icons, logos and states should be reused. For icon/logo
+selection and asset handling, follow
+[icon-logo-usage.md](./references/icon-logo-usage.md); inspect the exact Figma asset and
+record its verified name and node ID.
 
 **Prioritise existing components over creating new ones.**
 
@@ -154,6 +175,10 @@ DESIGN SYSTEM (mandatory — do not deviate):
 COMPONENTS — reuse these existing Swing components wherever they fit:
 - <component name> (<variant props>) — <usage>
 
+ICONS & LOGOS:
+- <Figma asset name> (<node ID>, <size/variant>) — <role and local asset path if exported>
+- Use exact Swing assets; do not replace them with emoji, text glyphs, or improvised marks.
+
 NEW IDEAS / COMPONENTS:
 - Keep genuinely new component and interaction-pattern roles to about 30% or less of the screen.
 - Explain why each cannot be covered by an existing Swing component or established pattern.
@@ -184,11 +209,14 @@ Load only what the task needs.
 
 | File | Read when |
 |---|---|
+| [references/design-foundations.md](./references/design-foundations.md) | Source responsibilities, foundation page map, and verified examples |
 | [references/design-tokens.md](./references/design-tokens.md) | **Start here.** Cross-file index + quick-reference token tables |
 | [references/color-system.md](./references/color-system.md) | Choosing any colour, fill, border, or semantic state |
 | [references/typography.md](./references/typography.md) | Choosing any type style, size, weight or tracking |
 | [references/spacing-layout.md](./references/spacing-layout.md) | Laying out a screen: padding, gaps, heights, radius, elevation, touch targets |
 | [references/components.md](./references/components.md) | Selecting or specifying any component (22 sections + full inventory) |
+| [references/icon-logo-usage.md](./references/icon-logo-usage.md) | Selecting, documenting, exporting, or implementing icons and logos |
+| [references/icon-logo-usage.md](./references/icon-logo-usage.md) | Selecting, documenting, exporting, or implementing icons and logos |
 | [references/interaction-patterns.md](./references/interaction-patterns.md) | States, feedback, navigation behaviour, overlays |
 | [references/design-quality-checklist.md](./references/design-quality-checklist.md) | **Before presenting.** Validation + mandatory disclosure block |
 
@@ -301,20 +329,22 @@ The Figma library remains the source of truth; these Markdown references are a m
 snapshot and do not update automatically. When the user says a component or token changed:
 
 1. Ask for or use the relevant Figma file/page/component link. Confirm it is in
-   `ADS: For Mobile`; do not infer a change from a screenshot or description alone when
+   `ADS: Foundations` or `ADS: For Mobile`, and determine which file owns the changed
+   specification; do not infer a change from a screenshot or description alone when
    exact specifications matter.
 2. Inspect the current component in Figma MCP. Record its page, component/variant name,
    node ID, properties, states, geometry, and styles that are relevant to the change.
 3. Compare the live Figma data with the existing reference. Report material differences,
    including removed or renamed variants. Do not silently normalize inconsistencies.
-4. Update only the affected sections in `references/components.md` and the relevant
-   token references (`color-system.md`, `typography.md`, `spacing-layout.md`,
-   `interaction-patterns.md`, or `design-tokens.md`). Update the quality checklist's
-   known-gap list if the change resolves or introduces a documented gap.
+4. Update only the affected sections in `references/design-foundations.md`,
+   `references/components.md`, `references/icon-logo-usage.md`, and the relevant token references
+   (`color-system.md`, `typography.md`, `spacing-layout.md`, `interaction-patterns.md`,
+   or `design-tokens.md`). Update the quality checklist's known-gap list if the change
+   resolves or introduces a documented gap.
 5. Cite Figma node IDs and distinguish verified updates from details still missing or
    unverified. Do not infer undocumented states or measurements.
-6. Mirror the same changes to `.github/skills/swing-skills-mob/` and verify both trees
-   are identical.
+6. Keep the `.claude/skills/swing-skills-mob/` tree as the single repository copy; do not
+   recreate a `.github/skills/` mirror unless the user explicitly requests it.
 7. Summarize what changed and what could not be verified. Do not commit or push unless
    the user asks.
 

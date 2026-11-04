@@ -11,9 +11,10 @@ task — not as an optional reference.
 
 ## What it does
 
-- Encodes the official Swing Mobile Design System extracted live from the
+- Uses [ADS - Foundations](https://www.figma.com/design/JDN6zpJA4feGSY8ZcQMQeM/ADS--Foundations?node-id=8-12868)
+  (`JDN6zpJA4feGSY8ZcQMQeM`) for visual foundations and
   [ADS - For Mobile](https://www.figma.com/design/ILlOBW8RpEBRmDvU6LQsx9/ADS--For-Mobile?node-id=149-4844)
-  Figma file (`ILlOBW8RpEBRmDvU6LQsx9`).
+  (`ILlOBW8RpEBRmDvU6LQsx9`) for mobile components, layout, and states.
 - Forces a 5-step workflow: read → inspect Figma → identify components → apply standards →
   validate.
 - Generates Figma Make / Figma Use prompts that contain the **actual** Swing
@@ -31,17 +32,10 @@ task — not as an optional reference.
 
 ## Install
 
-The skill is already installed in this repository in both supported locations:
+The skill is installed in this repository as a single source of truth:
 
 ```
 .claude/skills/swing-skills-mob/     ← Claude Code and other .claude-based hosts
-.github/skills/swing-skills-mob/     ← GitHub Copilot / VS Code
-```
-
-Both trees are identical. Update one and mirror to the other:
-
-```bash
-cp -R .claude/skills/swing-skills-mob/. .github/skills/swing-skills-mob/
 ```
 
 ### Other Agent Skills-compatible hosts
@@ -51,8 +45,12 @@ Copy the `swing-skills-mob/` folder into whichever location your host reads:
 | Host | Project path | Personal path |
 |---|---|---|
 | Claude Code | `.claude/skills/swing-skills-mob/` | `~/.claude/skills/swing-skills-mob/` |
-| GitHub Copilot / VS Code | `.github/skills/swing-skills-mob/` | `~/.copilot/skills/swing-skills-mob/` |
+| GitHub Copilot / VS Code | Use a supported skill discovery location | `~/.copilot/skills/swing-skills-mob/` |
 | Generic Agent Skills | `.agents/skills/swing-skills-mob/` | `~/.agents/skills/swing-skills-mob/` |
+
+This repository intentionally does not keep a duplicate `.github/skills/` copy. If a
+host does not discover `.claude/skills/`, install the skill in that host's personal
+location rather than adding a second copy to this repository.
 
 The folder name **must** remain `swing-skills-mob` — it has to match the `name` field in
 `SKILL.md` frontmatter. A mismatch fails silently.
@@ -82,11 +80,13 @@ swing-skills-mob/
 ├── README.md                             # This file
 └── references/
     ├── design-tokens.md                  # START HERE — cross-file index + quick-reference tables
+    ├── design-foundations.md             # Foundations file map, verified values and source hierarchy
     ├── color-system.md                   # Brand + neutral ramps, semantic mapping
     ├── typography.md                     # Manrope scale, named Figma styles, tracking formula
     ├── spacing-layout.md                 # Padding, gaps, heights, radius, elevation, touch targets
     ├── components.md                     # 22 component sections + full library inventory
     ├── interaction-patterns.md           # States, feedback, navigation, overlays
+    ├── icon-logo-usage.md                # Finding, documenting and using verified brand assets
     └── design-quality-checklist.md       # Validation procedure + disclosure block
 ```
 
@@ -99,6 +99,8 @@ the task needs.
 
 | | |
 |---|---|
+| Foundation source | `ADS: Foundations` — palette, elevation, iconography, brand/logo assets |
+| Mobile component source | `ADS: For Mobile` — mobile components, layout, typography usage, interaction states |
 | Canonical artboard | 375 × 812 (iPhone 11 Pro / X) |
 | Content width | 343px |
 | Typeface | Manrope (ExtraBold 800 / Bold 700 / Regular 400) |
@@ -132,8 +134,8 @@ Full list: [design-quality-checklist.md §5](./references/design-quality-checkli
 **With the skill** the agent:
 
 1. Reads `SKILL.md` → loads `design-tokens.md`, `components.md`, `spacing-layout.md`.
-2. Re-inspects the relevant pages in `ILlOBW8RpEBRmDvU6LQsx9` via Figma MCP to confirm
-   the components still match.
+2. Re-inspects relevant foundation tokens/assets in `JDN6zpJA4feGSY8ZcQMQeM` and mobile
+   components in `ILlOBW8RpEBRmDvU6LQsx9` via Figma MCP.
 3. Selects existing components — e.g. `Page header / Standard` (`Type=Title only,
    Title placement=Left`), `Card / Standard`, `Button / Actions` — instead of drawing new
    ones.
@@ -156,13 +158,17 @@ Full list: [design-quality-checklist.md §5](./references/design-quality-checkli
 
 - Values come from Figma MCP, never from memory. When re-extracting, cite the source node
   ID alongside the value.
+- Use `ADS: Foundations` for foundation tokens and brand assets, then verify usage in
+  `ADS: For Mobile`; the foundation palette alone does not establish a mobile component
+  variant.
 - Record inconsistencies **as they are** — for example the searchbar radius is 8px at
   Medium and 12px at Large. Do not normalise them away.
 - When a previously undocumented area is added to Figma, move it out of the §5 gap list.
 - Figma changes do not update these references automatically. To refresh one, ask the
   agent: *"Update `swing-skills-mob` from this Figma component"* and share its node link.
   The agent should inspect the live component, compare it with the docs, update only
-  affected references, mirror the update to `.github/skills/`, and report what changed.
+  affected references, keep `.claude/skills/` as the only repository copy, and report
+  what changed.
 - Provide edit access to the repository and view access to the Figma library. No commit
   or push is made unless requested.
 
@@ -170,8 +176,10 @@ Full list: [design-quality-checklist.md §5](./references/design-quality-checkli
 
 ## Source of truth
 
+[ADS - Foundations](https://www.figma.com/design/JDN6zpJA4feGSY8ZcQMQeM/ADS--Foundations?node-id=8-12868)
+(`fileKey: JDN6zpJA4feGSY8ZcQMQeM`) defines foundation assets and primitives.
 [ADS - For Mobile](https://www.figma.com/design/ILlOBW8RpEBRmDvU6LQsx9/ADS--For-Mobile?node-id=149-4844)
-(`fileKey: ILlOBW8RpEBRmDvU6LQsx9`)
+(`fileKey: ILlOBW8RpEBRmDvU6LQsx9`) defines mobile-specific components and behavior.
 
-Sibling libraries `ADS: For Desktop`, `ADS: Foundations`, `Minimal_Web` and
-`Eagle - Swing Design System 2.0` are **not** mobile sources.
+Sibling libraries `ADS: For Desktop`, `Minimal_Web`, and
+`Eagle - Swing Design System 2.0` are not substitutes for these sources.

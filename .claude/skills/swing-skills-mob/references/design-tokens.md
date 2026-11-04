@@ -1,11 +1,14 @@
 # Swing Mobile — Design Tokens (index)
 
-Consolidated index of every verified token in **ADS: For Mobile**
-(`ILlOBW8RpEBRmDvU6LQsx9`). Use this as the fast lookup; go to the topic file for
-context and usage rules.
+Consolidated index of verified visual foundations and mobile component tokens from
+**ADS: Foundations** (`JDN6zpJA4feGSY8ZcQMQeM`) and **ADS: For Mobile**
+(`ILlOBW8RpEBRmDvU6LQsx9`). Foundations defines the base visual assets and primitives;
+the Mobile library documents how components apply them. Use the topic file for source
+and usage rules.
 
 | Topic | File |
 |---|---|
+| Foundation files, scope, and verified examples | [design-foundations.md](./design-foundations.md) |
 | Colour palette & semantics | [color-system.md](./color-system.md) |
 | Type scale & named styles | [typography.md](./typography.md) |
 | Spacing, layout, radius, elevation | [spacing-layout.md](./spacing-layout.md) |
@@ -21,8 +24,11 @@ context and usage rules.
 
 | Token | Hex | Common semantic |
 |---|---|---|
+| `PURPLE/700` | `#360087` | Foundation palette; mobile usage not established |
 | `PURPLE/500` | `#5C00E6` | Primary action, focus ring, selection, active tab, Avatar bg, Toaster "Other actions" |
 | `PURPLE/600` | `#4900B8` | Radio selected fill |
+| `PURPLE/300` | `#B284F9` | Foundation palette; mobile usage not established |
+| `PURPLE/100` | `#E6DCFA` | Foundation palette; mobile usage not established |
 | `PURPLE/50` | `#F9F3FF` | Purple tint surface |
 | `PINK/500` | `#FF00DD` | Accent |
 | `PINK/50` | `#FFF3FC` | Pink tint surface |
@@ -35,6 +41,11 @@ context and usage rules.
 | `RED/500` | `#FF2A12` | Error / destructive |
 | `RED/600` | `#ED1800` | Error text emphasis |
 | `RED/50` | `#FFF8F5` | Red tint surface |
+
+Foundation-only Purple shades above are verified in `ADS: Foundations` palette `10:229`
+(`16:20`, `10:233`, `10:236`, `10:239`, `10:242`). Consult
+[design-foundations.md](./design-foundations.md) for node-level detail and verify
+component usage in Figma before applying them to Mobile.
 
 ### Neutral ramp
 
@@ -157,6 +168,10 @@ Namespace convention `namespace/name`:
 
 Observed sizes: `10 / 12 / 14 / 16 / 18 / 20 / 48` px, chosen per context.
 See [components.md](./components.md) §20 for the context→size mapping.
+For asset selection, logo protection, per-screen asset manifests, and stable code exports,
+follow [icon-logo-usage.md](./icon-logo-usage.md). The verified `Logo / Swing Pass icon`
+is node `912:14146` (20 × 20px within `Swing Pass`, `912:14145`); it is not a general
+Swing wordmark.
 
 ---
 
@@ -164,10 +179,10 @@ See [components.md](./components.md) §20 for the context→size mapping.
 
 | Source | Key | Notes |
 |---|---|---|
-| **`ADS: For Mobile`** | Figma file `ILlOBW8RpEBRmDvU6LQsx9` | **Authoritative for all mobile components.** Variable collection named `Collection` |
+| **`ADS: Foundations`** | Figma file `JDN6zpJA4feGSY8ZcQMQeM` | **Authoritative for foundational palette, elevation, icon, and brand/logo assets.** |
+| **`ADS: For Mobile`** | Figma file `ILlOBW8RpEBRmDvU6LQsx9` | **Authoritative for mobile components, layout, and interaction specifications.** Variable collection named `Collection` |
 | `Eagle - Swing Design System 2.0` | sibling library | Structural tokens only: `Font & Typefaces/Font`, `Font & Typefaces/DIsplay & Header Spacing`, `Border Radius/border-radius-{small,medium,large}`. Contains `Desktop / Button`, `Mobile / Button` |
 | `ADS: For Desktop` | sibling library | **Do not use for mobile** |
-| `ADS: Foundations` | sibling library | **Do not use for mobile** |
 | `Minimal_Web` | sibling library | **Do not use for mobile** |
 
 ### Not retrievable via MCP
