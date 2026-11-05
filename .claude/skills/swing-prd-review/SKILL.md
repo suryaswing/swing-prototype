@@ -6,9 +6,11 @@ argument-hint: 'Share the PRD or feature requirements to review before design'
 
 # Swing PRD Readiness Review
 
-Review the product requirements before designing. The goal is to expose missing
-decisions, test the PRD against real user and system scenarios, and help the team reach
-design readiness—not to invent product behavior or silently fill gaps.
+Review the PRD primarily as an end-to-end user and system flow. First make the happy
+path clear, then walk each step to find realistic alternate, interrupted, and failure
+cases the happy path does not cover. Surface only a short business perspective when a
+gap affects the feature's goals, success measures, operational ownership, or material
+product risk. Do not invent product behavior or silently fill gaps.
 
 This skill complements `swing-skills-mob`:
 
@@ -65,40 +67,45 @@ product policy. If sources conflict, surface the conflict and ask which source g
 
 ### Step 3 — Model the requirements
 
-Summarize the feature in plain language and extract:
+Summarize the feature in plain language, identify each actor, and map the primary
+happy-path flow from entry point to observable completion. Include user actions and
+system responses at each step. Then note any alternate paths that the PRD explicitly
+defines.
 
-- Target users/actors and their goals.
-- Entry points, preconditions, permissions, and relevant account states.
-- Main success path and expected outcome.
-- Data entered, created, changed, or exposed.
-- Business rules, limits, and acceptance criteria.
-- Dependencies, integrations, notifications, and system-owned behavior.
-- Explicit exclusions and unresolved decisions.
+Extract only the business context needed to interpret the flow:
 
-Use a traceable map: each finding should point to a PRD section, requirement ID,
-existing product behavior, or be labelled as a reviewer question.
+- The user or product outcome the flow is meant to achieve.
+- A success metric, operational dependency, or policy constraint that changes flow
+  behavior, if present.
+- Explicit exclusions that define what the flow must not promise.
+
+Do not turn this into a general business strategy review. Keep findings traceable to a
+PRD section, requirement ID, or verified precedent; label new observations as reviewer
+questions.
 
 ### Step 4 — Challenge the PRD with scenarios
 
-For each meaningful requirement, consider the applicable scenarios in
-[references/review-framework.md](./references/review-framework.md). At minimum, check:
+Walk the happy path in order. At every step, ask what happens when the user changes
+their mind, cannot continue, submits unexpected data, loses access/network, receives a
+failure or stale result, or re-enters after state has changed. Check relevant state
+transitions, permissions, duplicates/concurrency, notifications, and recovery paths.
+Consider accessibility, localization, and platform constraints only where they can
+change the flow or its completion.
 
-- Alternate routes and user cancellation/back-navigation.
-- Empty, partial, malformed, duplicate, or boundary-value input.
-- Validation timing, correction, and recovery after an error.
-- Loading, retry, timeout, offline, and service failure.
-- Permission denied, expired session, and changed user/account status.
-- Re-entry, duplicate submission, and concurrent/stale data.
-- Success, confirmation, and what happens next.
-- Accessibility, localization, and platform constraints when they affect behavior.
+Prioritize cases that alter the user's next step, risk data loss or duplicate action,
+create an unrecoverable state, expose private information, or contradict another PRD
+rule. Do not enumerate generic edge-case categories that have no plausible connection
+to this feature. For each gap, state the expected behavior only if the PRD or a
+confirmed source specifies it; otherwise write “not specified” and turn it into a
+question.
 
-Do not force irrelevant categories into every review. State which areas were not
-applicable or could not be verified.
+Use [references/review-framework.md](./references/review-framework.md) to structure the
+flow map and select relevant off-happy-path scenarios.
 
 ### Step 5 — Ask prioritized, answerable questions
 
-Ask questions that resolve product behavior, not cosmetic preferences that can wait
-until design. For each question include:
+Ask questions that resolve a flow decision, not cosmetic preferences that can wait
+until design. Group questions by the point in the flow where they arise and include:
 
 - **Priority:** Blocker, Important, or Later.
 - **Question:** one clear decision at a time.
@@ -107,8 +114,10 @@ until design. For each question include:
   option is already approved.
 - **Evidence:** the source that raised the question, or “not specified in the PRD”.
 
-Ask the smallest useful batch. Put design-blocking questions first. Avoid asking a
-question already answered by an authoritative, current source.
+Ask the smallest useful batch. Put design-blocking questions first, then order the rest
+by flow progression. Mention business impact briefly only when the question affects an
+explicit goal, metric, operating SLA, or material risk. Avoid asking a question already
+answered by an authoritative, current source.
 
 ### Step 6 — Give a readiness verdict
 
@@ -141,20 +150,27 @@ benefit from it when they can read the file.
 
 ## 3. Expected review output
 
-Use this structure unless the user asks for another format:
+Use this flow-first structure unless the user asks for another format:
 
 1. **PRD understanding** — short feature summary and scope.
 2. **Historical context** — relevant prior cases, their evidence/status, or “no relevant
    verified case found”.
-3. **Requirement-to-scenario review** — table with requirement/source, scenario,
-   expected behavior, and status (specified / missing / conflicting).
-4. **Edge cases** — prioritized and grouped by user flow or failure mode.
-5. **Questions before design** — Blocker, Important, Later.
-6. **Readiness verdict** — one of the three defined outcomes, with rationale.
-7. **Learning to retain** — confirmed rule/case to add, or confirmation still needed.
+3. **Happy-path flow** — concise ordered steps from entry to completion, including
+   actors and system responses.
+4. **Potential cases outside the happy path** — grouped under the flow step they affect;
+   include scenario, specified behavior or gap, and priority/risk.
+5. **Questions before design** — prioritized and ordered by flow progression. Include
+   why the decision matters and evidence.
+6. **Business perspective** — brief and only where directly relevant: impact on stated
+   goal/metric, operational dependency, or material risk. Omit if none.
+7. **Readiness verdict** — one of the three defined outcomes, with rationale.
+8. **Learning to retain** — confirmed rule/case to add, or confirmation still needed.
 
 Do not make up expected behavior for missing requirements. Use “not specified” and turn
 the gap into a question.
+
+Keep the happy-path summary short; spend most of the review on meaningful deviations
+from it.
 
 ## 4. Relationship to design work
 
@@ -174,6 +190,10 @@ A useful review is:
 - **Traceable:** findings map to source evidence or are explicitly reviewer-generated.
 - **Specific:** questions describe a decision and its impact.
 - **Risk-based:** core behavior and costly-to-change gaps outrank polish.
+- **Flow-first:** the happy path is a map for discovering plausible off-path scenarios,
+  not the whole review.
+- **Business-light:** connect findings to stated business outcomes when useful without
+  turning the review into a broad strategy or financial assessment.
 - **Historically aware:** prior cases inform the review without overriding current
   approved requirements.
 - **Actionable:** the team can answer the questions and know whether design can start.

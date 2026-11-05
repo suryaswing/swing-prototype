@@ -1,7 +1,27 @@
 # PRD Review Framework
 
-Use this as a scenario generator, not as a requirement to enumerate every row. Select
-the cases that can change behavior for the feature under review.
+Use this as a scenario generator, not as a requirement to enumerate every row. Begin
+with the PRD's happy path and select only cases that plausibly interrupt or change a
+step, state, outcome, or recovery path. Keep business analysis brief and tied to the
+feature's stated goals, metrics, and operating constraints.
+
+## Flow-first review method
+
+1. Write the main success path as numbered steps from entry to observable completion.
+   At each step, name the actor's action and the system response.
+2. Walk the flow in order. For each step, consider only relevant deviations: user
+   cancels or goes back; preconditions fail or permissions change; input is missing,
+   invalid, duplicated, or at a boundary; a request is slow, interrupted, retried, or
+   fails; state changes elsewhere; or the user returns to a stale/incomplete flow.
+3. Trace meaningful outcomes to the next step. Check that alternate states have a
+   defined owner, allowed action, exit/recovery path, and user-visible result where
+   applicable.
+4. Record what the PRD says. If behavior is absent or conflicting, mark it as such and
+   ask a decision question; do not design the missing rule on the product owner's
+   behalf.
+5. Prioritize cases that affect completion, data integrity, access/privacy, irreversible
+   actions, or a stated success/operational commitment. Omit generic cases with no
+   credible connection to this flow.
 
 ## Requirement-to-scenario matrix
 
@@ -23,14 +43,22 @@ the cases that can change behavior for the feature under review.
 | Accessibility and locale | Keyboard, screen reader, large text, RTL, translated/long strings, local formats | Behavior under accessibility/locale constraints unknown |
 | Analytics and success | What event or outcome measures success? What is out of scope? | No measurable acceptance or success criteria |
 
+Business review is intentionally lightweight: mention a goal, metric, operational
+dependency, or business risk only when it clarifies why a flow decision matters. Do not
+expand into market sizing, pricing, revenue modeling, or strategy unless requested.
+
 ## Edge-case table format
 
-| Requirement / source | Scenario | Expected behavior | Status | Risk |
+| Flow step / source | Off-happy-path scenario | Expected behavior or gap | Status | Priority |
 |---|---|---|---|---|
-| PRD section or ID | Concrete user/system condition | Exact behavior, or “not specified” | Specified / Missing / Conflict | Blocker / Important / Later |
+| Step 2, PRD §X | Concrete user/system condition | Exact behavior, or “not specified” | Specified / Missing / Conflict | Blocker / Important / Later |
 
 Use **Conflict** when two authoritative sources disagree. Include both sources; do not
 choose one silently.
+
+Group these rows by flow step. State “not applicable” only when a category was
+considered and genuinely does not apply; do not pad the report with a checklist of
+unrelated scenarios.
 
 ## Question prioritization
 
